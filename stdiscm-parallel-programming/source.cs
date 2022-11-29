@@ -11,7 +11,7 @@ namespace stdiscm_parallel_programming
     {
         static string URL;
         static float scrapingTime;
-        static uint noOfThreads;
+        static uint numberOfThreads;
 
         static void Main(string[] args)
         {
@@ -20,31 +20,71 @@ namespace stdiscm_parallel_programming
             Console.WriteLine("=========================================================\n");
 
             // Acquire the necessary parameters of the program.
-            string foo;
-
             while (true)
             {
                 Console.Write("URL :\t");
-                foo = Console.ReadLine();
+                var foo = Console.ReadLine();
 
                 if (isValidURL(foo))
                 {
                     break;
                 } else
                 {
-                    Console.WriteLine("!!!!! The given input does not resemble a URL. Please ensure that the input is a URL !!!!!\n");
+                    Console.WriteLine("\n!! The given input does not resemble a URL. Please ensure that the input is a URL !!\n");
                 }
             }
 
-            // !!! EVERYTHING BELOW THIS LINE IS TODO !!!
-            /*while(true)
+            Console.WriteLine();
+
+            while (true)
             {
                 Console.Write("Scraping Time :\t");
-                var sample = Console.Read();
-            }*/
-            
-            /*Console.Write("Number of threads :\t");
-            noOfThreads = Console.Read();*/
+                var foo = Console.ReadLine();
+                float convertedNum;
+
+                if (float.TryParse(foo, out convertedNum))
+                {
+                    if (convertedNum <= 0)
+                    {
+                        Console.WriteLine("\n!! The given input for Scraping time should be more than 0 !!\n");
+                    } else
+                    {
+                        scrapingTime = convertedNum;
+                        break;
+                    }
+                } else
+                {
+                    Console.WriteLine("\n!! The given input is not of numerical value! Please ensure that the input is in numerical value !!\n");
+                }
+            }
+
+            Console.WriteLine();
+
+            while (true)
+            {
+                Console.Write("Number of Threads :\t");
+                var foo = Console.ReadLine();
+                uint convertedNum;
+
+                if (uint.TryParse(foo, out convertedNum))
+                {
+                    numberOfThreads = convertedNum;
+                    break;
+                } else
+                {
+                    Console.WriteLine("\n!! The given input is should be of an unsigned integer value !!\n");
+                }
+            }
+
+            // Output paramerts set by the User
+            Console.WriteLine("\n\n=========================================================");
+            Console.WriteLine("Paremeters Set: ");
+            Console.WriteLine("URL : " + URL);
+            Console.WriteLine("Scraping Time : " + scrapingTime);
+            Console.WriteLine("Number of Threads : " + numberOfThreads);
+            Console.WriteLine("=========================================================");
+            Console.Write("Press enter to continue...");
+            Console.ReadKey();
         }
 
         /*
