@@ -7,13 +7,8 @@ using System.Threading.Tasks;
 
 namespace stdiscm_parallel_programming
 {
-    internal class source
+    internal class Source
     {
-        // Input variables
-        static string URL;
-        static float scrapingTime;
-        static uint numberOfThreads;
-
         static void Main(string[] args)
         {
             Console.WriteLine("=========================================================");
@@ -23,12 +18,19 @@ namespace stdiscm_parallel_programming
             // Acquire the necessary parameters of the program.
             GetInputParameters();
 
+            Output.AddEntry(new DataEntry("sample", "a", "b", "c"));
+            Output.AddEntry(new DataEntry("sample", "a", "b", "c"));
+            Output.AddEntry(new DataEntry("sample", "a", "b", "c"));
+
+            Output.OutputDataFile();
+            Output.OutputStatisticsFile();
+
             // Output paramerts set by the User
             Console.WriteLine("\n\n=========================================================");
             Console.WriteLine("Paremeters Set: ");
             Console.WriteLine("URL : " + URL);
-            Console.WriteLine("Scraping Time : " + scrapingTime);
-            Console.WriteLine("Number of Threads : " + numberOfThreads);
+            Console.WriteLine("Scraping Time : " + ScrapingTime);
+            Console.WriteLine("Number of Threads : " + NumberOfThreads);
             Console.WriteLine("=========================================================");
             Console.Write("Press enter to continue...");
             Console.ReadKey();
@@ -68,7 +70,7 @@ namespace stdiscm_parallel_programming
                     }
                     else
                     {
-                        scrapingTime = convertedNum;
+                        ScrapingTime = convertedNum;
                         break;
                     }
                 }
@@ -88,7 +90,7 @@ namespace stdiscm_parallel_programming
 
                 if (uint.TryParse(foo, out convertedNum))
                 {
-                    numberOfThreads = convertedNum;
+                    NumberOfThreads = convertedNum;
                     break;
                 }
                 else
@@ -111,6 +113,25 @@ namespace stdiscm_parallel_programming
             string Pattern = @"^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$";
             Regex Rgx = new Regex(Pattern, RegexOptions.Compiled | RegexOptions.IgnoreCase);
             return Rgx.IsMatch(URL);
+        }
+
+        // Auto-properties
+        public static string URL
+        {
+            get;
+            private set;
+        }
+
+        public static float ScrapingTime
+        {
+            get;
+            private set;
+        }
+
+        public static uint NumberOfThreads
+        {
+            get;
+            private set;
         }
     }
 }

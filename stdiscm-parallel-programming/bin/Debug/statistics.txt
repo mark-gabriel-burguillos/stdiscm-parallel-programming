@@ -1,0 +1,3 @@
+URL : sample.com
+Number of pages scraped : 0
+Number of email addresses found : 3
