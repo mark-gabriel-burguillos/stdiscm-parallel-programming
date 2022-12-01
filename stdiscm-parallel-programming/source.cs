@@ -7,12 +7,15 @@ using System.Threading.Tasks;
 
 namespace stdiscm_parallel_programming
 {
-    internal class source
+    internal class Source
     {
+<<<<<<< HEAD
         static string URL;
         static float scrapingTimeInSeconds;
         static int numberOfThreads;
 
+=======
+>>>>>>> output_setup
         static void Main(string[] args)
         {
             Console.WriteLine("=========================================================");
@@ -20,15 +23,39 @@ namespace stdiscm_parallel_programming
             Console.WriteLine("=========================================================\n");
 
             // Acquire the necessary parameters of the program.
+            GetInputParameters();
+
+            Output.AddEntry(new DataEntry("sample", "a", "b", "c"));
+            Output.AddEntry(new DataEntry("sample", "a", "b", "c"));
+            Output.AddEntry(new DataEntry("sample", "a", "b", "c"));
+
+            Output.OutputDataFile();
+            Output.OutputStatisticsFile();
+
+            // Output paramerts set by the User
+            Console.WriteLine("\n\n=========================================================");
+            Console.WriteLine("Paremeters Set: ");
+            Console.WriteLine("URL : " + URL);
+            Console.WriteLine("Scraping Time : " + ScrapingTime);
+            Console.WriteLine("Number of Threads : " + NumberOfThreads);
+            Console.WriteLine("=========================================================");
+            Console.Write("Press enter to continue...");
+            Console.ReadKey();
+        }
+
+        private static void GetInputParameters()
+        {
             while (true)
             {
                 Console.Write("URL :\t");
                 var foo = Console.ReadLine();
 
-                if (isValidURL(foo))
+                if (IsValidURL(foo))
                 {
+                    URL = foo;
                     break;
-                } else
+                }
+                else
                 {
                     Console.WriteLine("\n!! The given input does not resemble a URL. Please ensure that the input is a URL !!\n");
                 }
@@ -47,14 +74,20 @@ namespace stdiscm_parallel_programming
                     if (convertedNum <= 0)
                     {
                         Console.WriteLine("\n!! The given input for Scraping time should be more than 0 !!\n");
-                    } else
+                    }
+                    else
                     {
+<<<<<<< HEAD
                         const float SECONDS_IN_A_MINUTE = 60;
 
                         scrapingTimeInSeconds = convertedNum * SECONDS_IN_A_MINUTE;
+=======
+                        ScrapingTime = convertedNum;
+>>>>>>> output_setup
                         break;
                     }
-                } else
+                }
+                else
                 {
                     Console.WriteLine("\n!! The given input is not of numerical value! Please ensure that the input is in numerical value !!\n");
                 }
@@ -71,6 +104,7 @@ namespace stdiscm_parallel_programming
                 // The User skips this input_parameter
                 if (foo == "")
                 {
+<<<<<<< HEAD
                     /*
                      * Tells the program that it can produce
                      * as many threads as it wants.
@@ -81,12 +115,17 @@ namespace stdiscm_parallel_programming
                 else if (uint.TryParse(foo, out convertedNum))
                 {
                     numberOfThreads = (int)convertedNum;
+=======
+                    NumberOfThreads = convertedNum;
+>>>>>>> output_setup
                     break;
-                } else
+                }
+                else
                 {
                     Console.WriteLine("\n!! The given input is should be of an unsigned integer value !!\n");
                 }
             }
+<<<<<<< HEAD
 
             // Output paramerts set by the User
             Console.WriteLine("\n\n=========================================================");
@@ -106,6 +145,8 @@ namespace stdiscm_parallel_programming
             Console.WriteLine("=========================================================");
             Console.Write("Press enter to continue...");
             Console.ReadKey();
+=======
+>>>>>>> output_setup
         }
 
         /*
@@ -116,11 +157,30 @@ namespace stdiscm_parallel_programming
          * Stackoverflow, from website:
          * https://stackoverflow.com/questions/7578857/how-to-check-whether-a-string-is-a-valid-http-url
          */
-        private static bool isValidURL(string URL)
+        private static bool IsValidURL(string URL)
         {
             string Pattern = @"^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$";
             Regex Rgx = new Regex(Pattern, RegexOptions.Compiled | RegexOptions.IgnoreCase);
             return Rgx.IsMatch(URL);
+        }
+
+        // Auto-properties
+        public static string URL
+        {
+            get;
+            private set;
+        }
+
+        public static float ScrapingTime
+        {
+            get;
+            private set;
+        }
+
+        public static uint NumberOfThreads
+        {
+            get;
+            private set;
         }
     }
 }
