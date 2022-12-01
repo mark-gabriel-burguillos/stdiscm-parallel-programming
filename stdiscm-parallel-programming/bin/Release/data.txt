@@ -1,3 +1,0 @@
-sample,a,b,c
-sample,a,b,c
-sample,a,b,c
