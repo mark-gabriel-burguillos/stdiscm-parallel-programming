@@ -10,8 +10,8 @@ namespace stdiscm_parallel_programming
     internal class source
     {
         static string URL;
-        static float scrapingTime;
-        static uint numberOfThreads;
+        static float scrapingTimeInSeconds;
+        static int numberOfThreads;
 
         static void Main(string[] args)
         {
@@ -38,7 +38,7 @@ namespace stdiscm_parallel_programming
 
             while (true)
             {
-                Console.Write("Scraping Time :\t");
+                Console.Write("Scraping Time (in minutes):\t");
                 var foo = Console.ReadLine();
                 float convertedNum;
 
@@ -49,7 +49,9 @@ namespace stdiscm_parallel_programming
                         Console.WriteLine("\n!! The given input for Scraping time should be more than 0 !!\n");
                     } else
                     {
-                        scrapingTime = convertedNum;
+                        const float SECONDS_IN_A_MINUTE = 60;
+
+                        scrapingTimeInSeconds = convertedNum * SECONDS_IN_A_MINUTE;
                         break;
                     }
                 } else
@@ -62,13 +64,23 @@ namespace stdiscm_parallel_programming
 
             while (true)
             {
-                Console.Write("Number of Threads :\t");
+                Console.Write("Number of Threads (Optional) :\t");
                 var foo = Console.ReadLine();
                 uint convertedNum;
 
-                if (uint.TryParse(foo, out convertedNum))
+                // The User skips this input_parameter
+                if (foo == "")
                 {
-                    numberOfThreads = convertedNum;
+                    /*
+                     * Tells the program that it can produce
+                     * as many threads as it wants.
+                     */
+                    numberOfThreads = -1;
+                    break;
+                }
+                else if (uint.TryParse(foo, out convertedNum))
+                {
+                    numberOfThreads = (int)convertedNum;
                     break;
                 } else
                 {
@@ -80,8 +92,17 @@ namespace stdiscm_parallel_programming
             Console.WriteLine("\n\n=========================================================");
             Console.WriteLine("Paremeters Set: ");
             Console.WriteLine("URL : " + URL);
-            Console.WriteLine("Scraping Time : " + scrapingTime);
-            Console.WriteLine("Number of Threads : " + numberOfThreads);
+            Console.WriteLine("Scraping Time : " + scrapingTimeInSeconds + " seconds");
+            Console.Write("Number of Threads : ");
+
+            if (numberOfThreads == -1)
+            {
+                Console.WriteLine("Infinite");
+            } else
+            {
+                Console.WriteLine(numberOfThreads);
+            }
+
             Console.WriteLine("=========================================================");
             Console.Write("Press enter to continue...");
             Console.ReadKey();
