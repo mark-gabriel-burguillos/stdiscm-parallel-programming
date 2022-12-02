@@ -106,7 +106,6 @@ namespace stdiscm_parallel_programming
             Console.WriteLine("\n\n\n\n");
 
             BeginScraping();
-
         }
 
         private static void GetInputParameters()

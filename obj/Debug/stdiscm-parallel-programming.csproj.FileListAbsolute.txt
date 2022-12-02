@@ -1,0 +1,8 @@
+C:\Users\markgabriel\My Repositories\stdiscm-parallel-programming\stdiscm-parallel-programming\bin\Debug\stdiscm-parallel-programming.exe.config
+C:\Users\markgabriel\My Repositories\stdiscm-parallel-programming\stdiscm-parallel-programming\bin\Debug\stdiscm-parallel-programming.exe
+C:\Users\markgabriel\My Repositories\stdiscm-parallel-programming\stdiscm-parallel-programming\bin\Debug\stdiscm-parallel-programming.pdb
+C:\Users\markgabriel\My Repositories\stdiscm-parallel-programming\stdiscm-parallel-programming\obj\Debug\stdiscm-parallel-programming.csproj.AssemblyReference.cache
+C:\Users\markgabriel\My Repositories\stdiscm-parallel-programming\stdiscm-parallel-programming\obj\Debug\stdiscm-parallel-programming.csproj.SuggestedBindingRedirects.cache
+C:\Users\markgabriel\My Repositories\stdiscm-parallel-programming\stdiscm-parallel-programming\obj\Debug\stdiscm-parallel-programming.csproj.CoreCompileInputs.cache
+C:\Users\markgabriel\My Repositories\stdiscm-parallel-programming\stdiscm-parallel-programming\obj\Debug\stdiscm-parallel-programming.exe
+C:\Users\markgabriel\My Repositories\stdiscm-parallel-programming\stdiscm-parallel-programming\obj\Debug\stdiscm-parallel-programming.pdb
