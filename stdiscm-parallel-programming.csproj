@@ -38,6 +38,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InfoGathererThread.cs" />
     <Compile Include="output.cs" />
     <Compile Include="Source.cs" />
   </ItemGroup>

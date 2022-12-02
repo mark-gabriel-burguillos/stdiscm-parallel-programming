@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*
+ * References used:
+ * - oxylabs.io/blog/csharp-web-scraping
+ * - medium.com/c-sharp-progarmming/create-your-own-web-scraper-in-c-in-just-a-few-minutes-c42649adda8
+ * - html-agility-pack.net/documentation
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,26 +25,21 @@ namespace stdiscm_parallel_programming
 { 
     internal class Source
     {
-        public static void scrape(string url)
+        public static void Scrape(string url)
         {
-
             List<string> referenceList = new List<string>();
             List<string> contentList = new List<string>();
 
-            //https://oxylabs.io/blog/csharp-web-scraping
-            //https://medium.com/c-sharp-progarmming/create-your-own-web-scraper-in-c-in-just-a-few-minutes-c42649adda8
-            //https://html-agility-pack.net/documentation
-
-            //string url = "https://www.dlsu.edu.ph";
+            // url = "https://www.dlsu.edu.ph";
 
             HtmlWeb web = new HtmlWeb();
             HtmlDocument doc = web.Load(url);
 
-            //Look for all website links present within page
-
+            // Look for all website links present within page
             HtmlNodeCollection linkNodes = doc.DocumentNode.SelectNodes("//a[@href]");
             Console.WriteLine("Hyperlinks in Webpage");
             Console.WriteLine("==========================================================================");
+
             foreach (HtmlNode i in linkNodes)
             {
                 string value = i.Attributes["href"].Value;
@@ -53,6 +55,7 @@ namespace stdiscm_parallel_programming
                     Console.WriteLine(url + value);
                     referenceList.Add(url + value);
             }
+
             Console.WriteLine("\n\n");
 
             /*
@@ -63,15 +66,18 @@ namespace stdiscm_parallel_programming
             */
 
             var webpageContent = doc.DocumentNode.SelectNodes("//body");
+
             Console.WriteLine("Hyperlinks in Webpage");
             Console.WriteLine("==========================================================================");
+            
+
             foreach (HtmlNode i in webpageContent)
             {
-                Console.WriteLine(i.InnerText);
+                //Console.WriteLine(i.InnerText);
                 contentList.Add(i.InnerText);
             }
+            
             Console.WriteLine("\n\n");
-
 
             Console.WriteLine("=========================================================");
             Console.Write("Press enter to continue...");
@@ -94,14 +100,16 @@ namespace stdiscm_parallel_programming
             Console.WriteLine("Scraping Time : " + ScrapingTimeInSeconds + " seconds");
             Console.Write("Number of Threads : ");
 
-            if (NumberOfThreads == -1)
+            if (MaxNumberOfThreads == -1)
             {
                 Console.WriteLine("Infinite");
             }
             else
             {
-                Console.WriteLine(NumberOfThreads);
+                Console.WriteLine(MaxNumberOfThreads);
             }
+
+            AvailableNumberOfThreads = new Semaphore(MaxNumberOfThreads, MaxNumberOfThreads);
 
             Console.WriteLine("\n\n\n\n");
 
@@ -169,12 +177,12 @@ namespace stdiscm_parallel_programming
                      * Tells the program that it can produce
                      * as many threads as it wants.
                      */
-                    NumberOfThreads = -1;
+                    MaxNumberOfThreads = -1;
                     break;
                 }
                 else if (uint.TryParse(foo, out convertedNum))
                 {
-                    NumberOfThreads = (int)convertedNum;
+                    MaxNumberOfThreads = (int)convertedNum;
                     break;
                 }
                 else
@@ -202,7 +210,7 @@ namespace stdiscm_parallel_programming
         public static void BeginScraping()
         {
             //https://stackoverflow.com/questions/3360555/how-to-pass-parameters-to-threadstart-method-in-thread
-            Thread thread = new Thread(new ThreadStart(() => scrape(URL)));
+            Thread thread = new Thread(new ThreadStart(() => Scrape(URL)));
             thread.Start();
         }
 
@@ -219,11 +227,16 @@ namespace stdiscm_parallel_programming
             private set;
         }
 
-        public static int NumberOfThreads
+        public static int MaxNumberOfThreads
         {
             get;
             private set;
         }
 
+        public static Semaphore AvailableNumberOfThreads
+        {
+            get;
+            private set;
+        }
     }
 }
